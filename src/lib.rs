@@ -1,7 +1,8 @@
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
+mod memory;
+mod ops;
+
+use memory::Memory;
+
+pub struct LC3 {
+    memory: Memory,
 }

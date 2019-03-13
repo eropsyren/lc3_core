@@ -1,4 +1,4 @@
-mod op;
+mod ops;
 mod opcode;
 
 use crate::mem::Memory;
@@ -7,22 +7,22 @@ pub fn exec(instr: u16, mem: &mut Memory) {
     let opcode = instr >> 12;
 
     match opcode {
-        OP_BR => op::br(instr, mem),
-        OP_ADD => op::add(instr, mem),
-        OP_LD => op::ld(instr, mem),
-        OP_ST => op::st(instr, mem),
-        OP_JSR => op::jsr(instr, mem),
-        OP_AND => op::and(instr, mem),
-        OP_LDR => op::ldr(instr, mem),
-        OP_STR => op::str(instr, mem),
-        OP_RTI => op::rti(instr, mem),
-        OP_NOT => op::not(instr, mem),
-        OP_LDI => op::ldi(instr, mem),
-        OP_STI => op::sti(instr, mem),
-        OP_JMP => op::jmp(instr, mem),
-        OP_RES => op::res(instr, mem),
-        OP_LEA => op::lea(instr, mem),
-        OP_TRAP => op::trap(instr, mem),
+        opcode::BR => ops::br(instr, mem),
+        opcode::ADD => ops::add(instr, mem),
+        opcode::LD => ops::ld(instr, mem),
+        opcode::ST => ops::st(instr, mem),
+        opcode::JSR => ops::jsr(instr, mem),
+        opcode::AND => ops::and(instr, mem),
+        opcode::LDR => ops::ldr(instr, mem),
+        opcode::STR => ops::str(instr, mem),
+        opcode::RTI => ops::rti(instr, mem),
+        opcode::NOT => ops::not(instr, mem),
+        opcode::LDI => ops::ldi(instr, mem),
+        opcode::STI => ops::sti(instr, mem),
+        opcode::JMP => ops::jmp(instr, mem),
+        opcode::RES => ops::res(instr, mem),
+        opcode::LEA => ops::lea(instr, mem),
+        opcode::TRAP => ops::trap(instr, mem),
         _ => unreachable!("Bad instruction opcode: {:b}", opcode),
     }
 }

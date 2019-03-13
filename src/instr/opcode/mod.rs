@@ -1,0 +1,16 @@
+pub const OP_BR: u16 = 0;
+pub const OP_ADD: u16 = 1;
+pub const OP_LD: u16 = 2;
+pub const OP_ST: u16 = 3;
+pub const OP_JSR: u16 = 4;
+pub const OP_AND: u16 = 5;
+pub const OP_LDR: u16 = 6;
+pub const OP_STR: u16 = 7;
+pub const OP_RTI: u16 = 8;
+pub const OP_NOT: u16 = 9;
+pub const OP_LDI: u16 = 10;
+pub const OP_STI: u16 = 11;
+pub const OP_JMP: u16 = 12;
+pub const OP_RES: u16 = 13;
+pub const OP_LEA: u16 = 14;
+pub const OP_TRAP: u16 = 15;

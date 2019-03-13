@@ -2,7 +2,6 @@ mod op;
 mod opcode;
 
 use crate::mem::Memory;
-use op::*;
 
 pub fn exec(instr: u16, mem: &mut Memory) {
     let opcode = instr >> 12;

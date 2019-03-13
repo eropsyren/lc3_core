@@ -1,7 +1,7 @@
-mod memory;
-mod ops;
+mod mem;
+mod instr;
 
-use memory::Memory;
+use mem::Memory;
 
 pub struct LC3 {
     memory: Memory,

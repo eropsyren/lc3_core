@@ -15,6 +15,14 @@ pub struct Memory {
 
 impl Memory {
 
+    pub fn read(&self, cell: u16) -> u16 {
+        self.cells[cell as usize]
+    }
+
+    pub fn write(&mut self, cell: u16, val: u16) {
+        self.cells[cell as usize] = val;
+    }
+
     pub fn read_reg(&self, reg: u16) -> u16 {
         let reg = reg as usize;
 
@@ -24,7 +32,7 @@ impl Memory {
         }
     }
 
-    pub fn set_reg(&mut self, reg: u16, val: u16) {
+    pub fn write_reg(&mut self, reg: u16, val: u16) {
         let reg = reg as usize;
 
         match reg {
@@ -37,9 +45,13 @@ impl Memory {
         self.pc.get_val()
     }
 
-    pub fn set_pc(&mut self, val: u16) {
+    pub fn write_pc(&mut self, val: u16) {
         self.pc.set_val(val)
     } 
+
+    pub fn read_cond(&self) -> u16 {
+        self.cond.get_val()
+    }
 
     pub fn update_flags(&mut self, reg: u16) {
 

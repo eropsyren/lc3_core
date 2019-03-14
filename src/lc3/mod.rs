@@ -19,5 +19,4 @@ impl LC3 {
             controller,
         }
     }
-
 }

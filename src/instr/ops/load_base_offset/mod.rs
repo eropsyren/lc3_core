@@ -1,5 +1,5 @@
-use crate::mem::Memory;
 use super::utils;
+use crate::mem::Memory;
 
 pub fn ldr(instr: u16, mem: &mut Memory) {
     let dr = (instr >> 9) & 0x7;

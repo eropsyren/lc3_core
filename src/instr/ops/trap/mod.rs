@@ -1,9 +1,9 @@
 mod trap_codes;
 mod traps;
 
+use crate::controller::Controller;
 use crate::io::IODevice;
 use crate::mem::Memory;
-use crate::controller::Controller;
 
 pub fn trap(instr: u16, mem: &mut Memory, io: Box<dyn IODevice>, ctrl: &mut Controller) {
     let trap_code = instr & 0xFF;

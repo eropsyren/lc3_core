@@ -1,9 +1,9 @@
 mod opcode;
 mod ops;
 
+use crate::controller::Controller;
 use crate::io::IODevice;
 use crate::mem::Memory;
-use crate::controller::Controller;
 
 pub fn exec(instr: u16, mem: &mut Memory, io: Box<dyn IODevice>, ctrl: &mut Controller) {
     let opcode = instr >> 12;

@@ -1,5 +1,5 @@
-use crate::mem::Memory;
 use super::utils;
+use crate::mem::Memory;
 
 pub fn jsr(instr: u16, mem: &mut Memory) {
     let long_flag = (instr >> 11) & 1;

@@ -3,6 +3,11 @@ pub struct Controller {
 }
 
 impl Controller {
+
+    pub fn is_running(&self) -> bool {
+        self.is_running()
+    }
+
     pub fn start(&mut self) {
         self.running = true;
     }

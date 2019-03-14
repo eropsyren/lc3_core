@@ -18,8 +18,8 @@ impl Memory {
     pub fn new() -> Memory {
         let cells = [0; CELL_COUNT];
         let registers = [Register::new(); 8];
-        let pc = Register::new_with(PC_START);
-        let cond = Register::new_with(COND_ZRO);
+        let pc = Register::with(PC_START);
+        let cond = Register::with(COND_ZRO);
 
         Memory {
             cells,
@@ -41,7 +41,7 @@ impl Memory {
         let reg = reg as usize;
 
         match reg {
-            0...7 => self.registers[reg].get_val(),
+            0...7 => self.registers[reg].get(),
             _ => panic!("Cannot acess r{}", reg),
         }
     }
@@ -50,21 +50,21 @@ impl Memory {
         let reg = reg as usize;
 
         match reg {
-            0...7 => self.registers[reg].set_val(val),
+            0...7 => self.registers[reg].set(val),
             _ => panic!("Cannot acess r{}", reg),
         }
     }
 
     pub fn read_pc(&self) -> u16 {
-        self.pc.get_val()
+        self.pc.get()
     }
 
     pub fn write_pc(&mut self, val: u16) {
-        self.pc.set_val(val)
+        self.pc.set(val)
     }
 
     pub fn read_cond(&self) -> u16 {
-        self.cond.get_val()
+        self.cond.get()
     }
 
     pub fn update_flags(&mut self, reg: u16) {
@@ -74,10 +74,10 @@ impl Memory {
             panic!("Cannot acess r{}", reg);
         }
 
-        match self.registers[reg].get_val() {
-            0 => self.cond.set_val(COND_ZRO),
-            val if val >> 15 == 1 => self.cond.set_val(COND_NEG),
-            _ => self.cond.set_val(COND_POS),
+        match self.registers[reg].get() {
+            0 => self.cond.set(COND_ZRO),
+            val if val >> 15 == 1 => self.cond.set(COND_NEG),
+            _ => self.cond.set(COND_POS),
         }
     }
 }

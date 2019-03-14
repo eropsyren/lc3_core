@@ -1,9 +1,10 @@
-mod ops;
 mod opcode;
+mod ops;
 
+use crate::io::IODevice;
 use crate::mem::Memory;
 
-pub fn exec(instr: u16, mem: &mut Memory) {
+pub fn exec(instr: u16, mem: &mut Memory, io: Box<dyn IODevice>) {
     let opcode = instr >> 12;
 
     match opcode {
@@ -22,7 +23,7 @@ pub fn exec(instr: u16, mem: &mut Memory) {
         opcode::JMP => ops::jmp(instr, mem),
         opcode::RES => ops::res(instr, mem),
         opcode::LEA => ops::lea(instr, mem),
-        opcode::TRAP => ops::trap(instr, mem),
+        opcode::TRAP => ops::trap(instr, mem, io),
         _ => unreachable!("Bad instruction opcode: {:b}", opcode),
     }
 }

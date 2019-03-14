@@ -4,6 +4,12 @@ pub struct Controller {
 
 impl Controller {
 
+    pub fn new() -> Controller {
+        Controller {
+            running: true,
+        }
+    }
+
     pub fn is_running(&self) -> bool {
         self.is_running()
     }

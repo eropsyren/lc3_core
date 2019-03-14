@@ -5,6 +5,7 @@ use flags::{COND_NEG, COND_POS, COND_ZRO};
 use reg::Register;
 
 const CELL_COUNT: usize = 65_536;
+const PC_START: u16 = 0x3000;
 
 pub struct Memory {
     cells: [u16; CELL_COUNT],
@@ -14,6 +15,19 @@ pub struct Memory {
 }
 
 impl Memory {
+    pub fn new() -> Memory {
+        let cells = [0; CELL_COUNT];
+        let registers = [Register::new(); 8];
+        let pc = Register::new_with(PC_START);
+        let cond = Register::new_with(COND_ZRO);
+
+        Memory {
+            cells,
+            registers,
+            pc,
+            cond,
+        }
+    }
 
     pub fn read(&self, cell: u16) -> u16 {
         self.cells[cell as usize]
@@ -47,14 +61,13 @@ impl Memory {
 
     pub fn write_pc(&mut self, val: u16) {
         self.pc.set_val(val)
-    } 
+    }
 
     pub fn read_cond(&self) -> u16 {
         self.cond.get_val()
     }
 
     pub fn update_flags(&mut self, reg: u16) {
-
         let reg = reg as usize;
 
         if self.registers.len() >= reg {

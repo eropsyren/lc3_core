@@ -23,3 +23,33 @@ pub fn and(instr: u16, mem: &mut Memory) {
 
     mem.update_flags(dr);
 }
+
+#[cfg(test)]
+mod tests {
+    use super::and;
+    use crate::mem::Memory;
+    use crate::mem::{COND_NEG, COND_POS, COND_ZRO};
+
+    #[test]
+    fn test_and_immediate() {
+        let mut mem = Memory::new();
+        let instr = 0b_0101_000_001_1_00001;
+        mem.write_reg(1, 1);
+        and(instr, &mut mem);
+
+        assert_eq!(1, mem.read_reg(0));
+        assert_eq!(COND_POS, mem.read_cond());
+    }
+
+    #[test]
+    fn test_and_register() {
+        let mut mem = Memory::new();
+        let instr = 0b_0101_000_001_0_00_010;
+        mem.write_reg(1, 1);
+        mem.write_reg(2, 3);
+        and(instr, &mut mem);
+
+        assert_eq!(1, mem.read_reg(0));
+        assert_eq!(COND_POS, mem.read_cond());
+    }
+}

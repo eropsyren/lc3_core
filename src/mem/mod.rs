@@ -1,7 +1,8 @@
 mod flags;
 mod reg;
 
-use flags::{COND_NEG, COND_POS, COND_ZRO};
+pub use flags::{COND_NEG, COND_POS, COND_ZRO};
+
 use reg::Register;
 
 const CELL_COUNT: usize = 65_536;

@@ -42,7 +42,7 @@ impl Memory {
 
         match reg {
             0...7 => self.registers[reg].get(),
-            _ => panic!("Cannot acess r{}", reg),
+            _ => panic!("Cannot read r{}", reg),
         }
     }
 
@@ -51,7 +51,7 @@ impl Memory {
 
         match reg {
             0...7 => self.registers[reg].set(val),
-            _ => panic!("Cannot acess r{}", reg),
+            _ => panic!("Cannot write r{}", reg),
         }
     }
 
@@ -70,7 +70,7 @@ impl Memory {
     pub fn update_flags(&mut self, reg: u16) {
         let reg = reg as usize;
 
-        if self.registers.len() >= reg {
+        if reg >= self.registers.len() {
             panic!("Cannot acess r{}", reg);
         }
 
@@ -79,5 +79,94 @@ impl Memory {
             val if val >> 15 == 1 => self.cond.set(COND_NEG),
             _ => self.cond.set(COND_POS),
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::flags::{COND_NEG, COND_POS, COND_ZRO};
+    use super::Memory;
+
+    #[test]
+    fn test_read() {
+        let mut mem = Memory::new();
+        mem.cells[10] = 1;
+
+        assert_eq!(1, mem.read(10));
+    }
+
+    #[test]
+    fn test_write() {
+        let mut mem = Memory::new();
+        mem.write(0, 1);
+
+        assert_eq!(1, mem.cells[0]);
+    }
+
+    #[test]
+    fn test_read_reg() {
+        let mut mem = Memory::new();
+        mem.registers[0].set(255);
+
+        assert_eq!(255, mem.read_reg(0));
+    }
+
+    #[test]
+    fn test_write_reg() {
+        let mut mem = Memory::new();
+        mem.write_reg(7, 200);
+
+        assert_eq!(200, mem.registers[7].get());
+    }
+
+    #[test]
+    fn test_read_pc() {
+        let mut mem = Memory::new();
+        mem.pc.set(0x3000);
+
+        assert_eq!(0x3000, mem.read_pc());
+    }
+
+    #[test]
+    fn test_write_pc() {
+        let mut mem = Memory::new();
+        mem.write_pc(800);
+
+        assert_eq!(800, mem.pc.get());
+    }
+
+    #[test]
+    fn test_read_cond() {
+        let mut mem = Memory::new();
+        mem.cond.set(COND_NEG);
+
+        assert_eq!(COND_NEG, mem.read_cond());
+    }
+
+    #[test]
+    fn test_update_flags_zro() {
+        let mut mem = Memory::new();
+        mem.write_reg(0, 0);
+        mem.update_flags(0);
+
+        assert_eq!(COND_ZRO, mem.read_cond());
+    }
+
+    #[test]
+    fn test_update_flags_pos() {
+        let mut mem = Memory::new();
+        mem.write_reg(0, 1);
+        mem.update_flags(0);
+
+        assert_eq!(COND_POS, mem.read_cond());
+    }
+
+    #[test]
+    fn test_update_flags_neg() {
+        let mut mem = Memory::new();
+        mem.write_reg(0, 0b1000_0000_0000_0001);
+        mem.update_flags(0);
+
+        assert_eq!(COND_NEG, mem.read_cond());
     }
 }

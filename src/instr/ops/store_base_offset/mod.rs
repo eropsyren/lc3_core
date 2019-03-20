@@ -11,3 +11,20 @@ pub fn str(instr: u16, mem: &mut Memory) {
 
     mem.write(mem_location + offset, val);
 }
+
+#[cfg(test)]
+mod tests {
+    use super::str;
+    use crate::mem::Memory;
+
+    #[test]
+    fn test_str() {
+        let mut mem = Memory::new();
+        let instr = 0b_0111_001_010_000010;
+        mem.write_reg(1, 255);
+        mem.write_reg(2, 10);
+        str(instr, &mut mem);
+
+        assert_eq!(255, mem.read(10 + 2));
+    }
+}

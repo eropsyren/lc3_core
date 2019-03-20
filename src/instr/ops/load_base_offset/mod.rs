@@ -13,3 +13,22 @@ pub fn ldr(instr: u16, mem: &mut Memory) {
 
     mem.update_flags(dr);
 }
+
+#[cfg(test)]
+mod tests {
+    use super::ldr;
+    use crate::mem::Memory;
+    use crate::mem::{COND_NEG, COND_POS, COND_ZRO};
+
+    #[test]
+    fn test_ldr() {
+        let mut mem = Memory::new();
+        let instr = 0b_0110_001_010_000001;
+        mem.write_reg(2, 1);
+        mem.write(2, 255);
+        ldr(instr, &mut mem);
+
+        assert_eq!(255, mem.read_reg(1));
+        assert_eq!(COND_POS, mem.read_cond());
+    }
+}

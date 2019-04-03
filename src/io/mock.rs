@@ -61,3 +61,64 @@ pub enum Val {
     String(String),
     U16(u16),
 }
+
+#[cfg(test)]
+mod tests {
+    use super::MockIODevice;
+    use super::Msg;
+    use super::Val;
+    use crate::IODevice;
+
+    #[test]
+    fn test_new() {
+        let io = MockIODevice::new();
+
+        assert_eq!(io.msg, None);
+        assert_eq!(io.val, None);
+    }
+
+    #[test]
+    fn test_get_msg() {
+        let mut io = MockIODevice::new();
+        io.msg = Some(Msg::GetChar);
+
+        assert_eq!(Some(Msg::GetChar), *io.get_msg());
+    }
+
+    #[test]
+    fn test_get_val() {
+        let mut io = MockIODevice::new();
+        io.val = Some(Val::U16(11));
+
+        assert_eq!(Some(Val::U16(11)), *io.get_val());
+    }
+
+    #[test]
+    fn test_print_str() {
+        let mut io = MockIODevice::new();
+        io.print_str("This is a &str");
+
+        assert_eq!(Some(Msg::PrintStr), *io.get_msg());
+        assert_eq!(
+            Some(Val::String(String::from("This is a &str"))),
+            *io.get_val()
+        );
+    }
+
+    #[test]
+    fn test_print_char() {
+        let mut io = MockIODevice::new();
+        io.print_char(11);
+
+        assert_eq!(Some(Msg::PrintChar), *io.get_msg());
+        assert_eq!(Some(Val::U16(11)), *io.get_val());
+    }
+
+    #[test]
+    fn test_get_char() {
+        let mut io = MockIODevice::new();
+        io.get_char();
+
+        assert_eq!(Some(Msg::GetChar), *io.get_msg());
+    }
+}

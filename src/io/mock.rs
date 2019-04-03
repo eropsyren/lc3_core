@@ -39,15 +39,21 @@ impl IODevice for MockIODevice {
     }
 }
 
+impl PartialEq for MockIODevice {
+    fn eq(&self, other: &MockIODevice) -> bool {
+        self.msg == other.msg && self.val == other.val
+    }
+}
+
+#[derive(PartialEq)]
 pub enum Msg {
     PrintStr,
     PrintChar,
     GetChar,
-    Empty,
 }
 
+#[derive(PartialEq)]
 pub enum Val {
     String(String),
     U16(u16),
-    Empty,
 }

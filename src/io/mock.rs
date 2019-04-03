@@ -6,6 +6,12 @@ pub struct MockIODevice {
     msg: Msg,
 }
 
+impl MockIODevice {
+    pub fn new() -> MockIODevice {
+        MockIODevice { msg: Msg::Empty }
+    }
+}
+
 impl IODevice for MockIODevice {
     fn print_str(&mut self, str: &str) {
         self.msg = Msg::PrintStr(String::from(str));
@@ -26,4 +32,5 @@ pub enum Msg {
     PrintStr(String),
     PrintChar(u16),
     GetChar(u16),
+    Empty,
 }

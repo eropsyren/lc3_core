@@ -2,11 +2,11 @@ use super::IODevice;
 
 const a_char: u16 = 97;
 
-pub struct IODeviceLogger {
+pub struct MockIODevice {
     msg: Msg,
 }
 
-impl IODevice for IODeviceLogger {
+impl IODevice for MockIODevice {
     fn print_str(&mut self, str: &str) {
         self.msg = Msg::PrintStr(String::from(str));
     }

@@ -18,6 +18,10 @@ impl MockIODevice {
     pub fn get_msg(&self) -> &Option<Msg> {
         &self.msg
     }
+
+    pub fn get_val(&self) -> &Option<Val> {
+        &self.val
+    }
 }
 
 impl IODevice for MockIODevice {
@@ -45,14 +49,14 @@ impl PartialEq for MockIODevice {
     }
 }
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Debug)]
 pub enum Msg {
     PrintStr,
     PrintChar,
     GetChar,
 }
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Debug)]
 pub enum Val {
     String(String),
     U16(u16),

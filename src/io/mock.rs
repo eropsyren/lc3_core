@@ -22,7 +22,7 @@ impl IODevice for MockIODevice {
     }
 }
 
-enum Msg {
+pub enum Msg {
     PrintStr(String),
     PrintChar(u16),
     GetChar(u16),

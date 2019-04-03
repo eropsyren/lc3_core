@@ -15,7 +15,7 @@ impl MockIODevice {
         }
     }
 
-    pub fn getMsg(&self) -> &Option<Msg> {
+    pub fn get_msg(&self) -> &Option<Msg> {
         &self.msg
     }
 }

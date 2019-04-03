@@ -10,6 +10,10 @@ impl MockIODevice {
     pub fn new() -> MockIODevice {
         MockIODevice { msg: Msg::Empty }
     }
+
+    pub fn getMsg(&self) -> &Msg {
+        &self.msg
+    }
 }
 
 impl IODevice for MockIODevice {

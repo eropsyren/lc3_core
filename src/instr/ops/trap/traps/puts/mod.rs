@@ -1,7 +1,7 @@
 use crate::io::IODevice;
 use crate::mem::Memory;
 
-pub fn puts(mem: &mut Memory, io: Box<dyn IODevice>) {
+pub fn puts(mem: &mut Memory, mut io: Box<dyn IODevice>) {
     let mut index = mem.read_reg(0);
     let mut c = mem.read(index);
 

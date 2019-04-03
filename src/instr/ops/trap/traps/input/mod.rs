@@ -1,7 +1,7 @@
 use crate::io::IODevice;
 use crate::mem::Memory;
 
-pub fn input(mem: &mut Memory, io: Box<dyn IODevice>) {
+pub fn input(mem: &mut Memory, mut io: Box<dyn IODevice>) {
     io.print_str("Enter a character: ");
 
     let c = io.get_char();

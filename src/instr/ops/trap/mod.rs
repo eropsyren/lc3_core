@@ -5,7 +5,7 @@ use crate::controller::Controller;
 use crate::io::IODevice;
 use crate::mem::Memory;
 
-pub fn trap(instr: u16, mem: &mut Memory, io: Box<dyn IODevice>, ctrl: &mut Controller) {
+pub fn trap(instr: u16, mem: &mut Memory, io: &mut Box<dyn IODevice>, ctrl: &mut Controller) {
     let trap_code = instr & 0xFF;
 
     match trap_code {

@@ -5,7 +5,7 @@ use crate::controller::Controller;
 use crate::io::IODevice;
 use crate::mem::Memory;
 
-pub fn exec(instr: u16, mem: &mut Memory, io: &mut Box<dyn IODevice>, ctrl: &mut Controller) {
+pub fn exec(instr: u16, mem: &mut Memory, io: &mut dyn IODevice, ctrl: &mut Controller) {
     let opcode = instr >> 12;
 
     match opcode {

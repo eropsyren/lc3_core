@@ -13,7 +13,6 @@ pub fn input(mem: &mut Memory, io: &mut dyn IODevice) {
 mod tests {
     use super::input;
     use crate::io::IODevice;
-    use crate::io::MockIODevice;
     use crate::io::Msg;
     use crate::io::Val;
     use crate::mem::Memory;

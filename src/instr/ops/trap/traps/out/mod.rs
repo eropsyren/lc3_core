@@ -10,7 +10,6 @@ pub fn out(mem: &mut Memory, io: &mut dyn IODevice) {
 #[cfg(test)]
 mod tests {
     use super::out;
-    use crate::io::IODevice;
     use crate::io::MockIODevice;
     use crate::io::Msg;
     use crate::io::Val;

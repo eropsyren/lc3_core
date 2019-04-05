@@ -73,7 +73,7 @@ mod tests {
 
     #[test]
     fn test_logs() {
-        let io = MockIODevice::new();
+        let mut io = MockIODevice::new();
         let v: Vec<(Msg, Val)> = vec![
             (Msg::PrintStr, Val::String(String::from("s"))),
             (Msg::PrintChar, Val::U16(0)),
@@ -91,7 +91,7 @@ mod tests {
 
     #[test]
     fn last() {
-        let io = MockIODevice::new();
+        let mut io = MockIODevice::new();
         let v: Vec<(Msg, Val)> = vec![
             (Msg::PrintStr, Val::String(String::from("s"))),
             (Msg::PrintChar, Val::U16(0)),

@@ -19,8 +19,8 @@ mod tests {
 
         getc(&mut mem, &mut io);
 
-        let val = match io.get_val() {
-            Some(Val::U16(c)) => *c,
+        let val = match io.last() {
+            Some((_, Val::U16(c))) => c,
             _ => unreachable!(),
         };
 

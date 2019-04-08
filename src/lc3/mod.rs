@@ -21,7 +21,21 @@ impl LC3 {
         }
     }
 
-    pub fn exec(&mut self) {
+    pub fn load(&mut self) {
+        // TODO: handle program loading
+
+        self.controller.start();
+    }
+
+    pub fn next(&mut self) -> bool {
+        if self.controller.is_running() {
+            self.exec();
+        }
+
+        self.controller.is_running()
+    }
+
+    fn exec(&mut self) {
         let pc = self.memory.read_pc();
         let instr = self.memory.read(pc);
 

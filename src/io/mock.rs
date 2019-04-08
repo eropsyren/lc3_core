@@ -1,11 +1,13 @@
 use super::IODevice;
 
-const a_char: u16 = 97;
+const A_CHAR: u16 = 97;
 
+#[allow(dead_code)]
 pub struct MockIODevice {
     logs: Vec<(Msg, Val)>,
 }
 
+#[allow(dead_code)]
 impl MockIODevice {
     pub fn new() -> MockIODevice {
         MockIODevice { logs: vec![] }
@@ -36,9 +38,9 @@ impl IODevice for MockIODevice {
     }
 
     fn get_char(&mut self) -> u16 {
-        self.logs.push((Msg::GetChar, Val::U16(a_char)));
+        self.logs.push((Msg::GetChar, Val::U16(A_CHAR)));
 
-        a_char
+        A_CHAR
     }
 }
 
@@ -57,10 +59,10 @@ pub enum Val {
 
 #[cfg(test)]
 mod tests {
-    use super::a_char;
     use super::MockIODevice;
     use super::Msg;
     use super::Val;
+    use super::A_CHAR;
     use crate::IODevice;
 
     #[test]
@@ -77,7 +79,7 @@ mod tests {
         let v: Vec<(Msg, Val)> = vec![
             (Msg::PrintStr, Val::String(String::from("s"))),
             (Msg::PrintChar, Val::U16(0)),
-            (Msg::GetChar, Val::U16(a_char)),
+            (Msg::GetChar, Val::U16(A_CHAR)),
         ];
 
         io.print_str("s");
@@ -92,17 +94,12 @@ mod tests {
     #[test]
     fn last() {
         let mut io = MockIODevice::new();
-        let v: Vec<(Msg, Val)> = vec![
-            (Msg::PrintStr, Val::String(String::from("s"))),
-            (Msg::PrintChar, Val::U16(0)),
-            (Msg::GetChar, Val::U16(a_char)),
-        ];
 
         io.print_str("s");
         io.print_char(0);
         io.get_char();
 
-        assert_eq!(Some((Msg::GetChar, Val::U16(a_char))), io.last());
+        assert_eq!(Some((Msg::GetChar, Val::U16(A_CHAR))), io.last());
     }
 
     #[test]
@@ -129,6 +126,6 @@ mod tests {
         let mut io = MockIODevice::new();
         io.get_char();
 
-        assert_eq!(Some((Msg::GetChar, Val::U16(a_char))), io.last());
+        assert_eq!(Some((Msg::GetChar, Val::U16(A_CHAR))), io.last());
     }
 }

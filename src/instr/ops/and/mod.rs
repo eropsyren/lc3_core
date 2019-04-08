@@ -28,7 +28,7 @@ pub fn and(instr: u16, mem: &mut Memory) {
 mod tests {
     use super::and;
     use crate::mem::Memory;
-    use crate::mem::{COND_NEG, COND_POS, COND_ZRO};
+    use crate::mem::COND_POS;
 
     #[test]
     fn test_and_immediate() {

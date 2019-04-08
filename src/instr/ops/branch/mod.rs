@@ -16,7 +16,6 @@ pub fn br(instr: u16, mem: &mut Memory) {
 mod tests {
     use super::br;
     use crate::mem::Memory;
-    use crate::mem::{COND_NEG, COND_POS, COND_ZRO};
 
     #[test]
     fn test_branch_zero() {

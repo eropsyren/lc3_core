@@ -1,5 +1,3 @@
-use crate::mem::Memory;
-
-pub fn rti(instr: u16, mem: &mut Memory) {
+pub fn rti() {
     panic!("RTI instruction is unused");
 }

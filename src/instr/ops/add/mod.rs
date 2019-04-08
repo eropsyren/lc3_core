@@ -31,7 +31,7 @@ mod tests {
 
     use super::add;
     use crate::mem::Memory;
-    use crate::mem::{COND_NEG, COND_POS, COND_ZRO};
+    use crate::mem::{COND_NEG, COND_POS};
 
     #[test]
     fn test_add_immediate() {

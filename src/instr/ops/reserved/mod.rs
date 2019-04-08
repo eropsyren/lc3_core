@@ -1,5 +1,3 @@
-use crate::mem::Memory;
-
-pub fn res(instr: u16, mem: &mut Memory) {
+pub fn res() {
     panic!("RES instruction is unused");
 }

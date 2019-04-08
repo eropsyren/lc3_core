@@ -17,7 +17,7 @@ pub fn ld(instr: u16, mem: &mut Memory) {
 mod tests {
     use super::ld;
     use crate::mem::Memory;
-    use crate::mem::{COND_NEG, COND_POS, COND_ZRO};
+    use crate::mem::COND_POS;
 
     #[test]
     fn test_ld() {

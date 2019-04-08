@@ -18,7 +18,7 @@ pub fn ldr(instr: u16, mem: &mut Memory) {
 mod tests {
     use super::ldr;
     use crate::mem::Memory;
-    use crate::mem::{COND_NEG, COND_POS, COND_ZRO};
+    use crate::mem::COND_POS;
 
     #[test]
     fn test_ldr() {

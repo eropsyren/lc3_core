@@ -4,7 +4,7 @@ pub struct Controller {
 
 impl Controller {
     pub fn new() -> Controller {
-        Controller { running: true }
+        Controller { running: false }
     }
 
     pub fn is_running(&self) -> bool {
@@ -29,7 +29,7 @@ mod tests {
     fn test_controller_new() {
         let ctrl = Controller::new();
 
-        assert_eq!(ctrl.running, true);
+        assert_eq!(ctrl.running, false);
     }
 
     #[test]

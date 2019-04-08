@@ -1,4 +1,5 @@
 use crate::controller::Controller;
+use crate::instr;
 use crate::io::IODevice;
 use crate::mem::Memory;
 
@@ -18,5 +19,19 @@ impl LC3 {
             io_device,
             controller,
         }
+    }
+
+    pub fn exec(&mut self) {
+        let pc = self.memory.read_pc();
+        let instr = self.memory.read(pc);
+
+        self.memory.write_pc(pc + 1);
+
+        instr::exec(
+            instr,
+            &mut self.memory,
+            &mut *self.io_device,
+            &mut self.controller,
+        );
     }
 }

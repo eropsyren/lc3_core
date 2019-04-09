@@ -27,9 +27,17 @@ mod tests {
         let mut mem = Memory::new();
         let mut io = MockIODevice::new();
 
+        let char_sequence = "this is a message";
+
+        mem.write_reg(0, 0);
+        for (i, c) in char_sequence.chars().enumerate() {
+            mem.write(i as u16, c as u16);
+        }
+
         puts(&mut mem, &mut io);
 
-        let expected_values: Vec<u16> = io
+        let expected: Vec<u16> = char_sequence.chars().map(|c| c as u16).collect();
+        let found: Vec<u16> = io
             .logs()
             .iter()
             .map(|log| match log {
@@ -42,21 +50,8 @@ mod tests {
             })
             .collect();
 
-        let mut found_values: Vec<u16> = vec![];
-
-        let mut index = mem.read_reg(0);
-        let mut val = mem.read(index);
-
-        while val != 0x0000 {
-            found_values.push(val);
-
-            index += 1;
-
-            val = mem.read(index);
-        }
-
-        for (expected, found) in expected_values.iter().zip(found_values.iter()) {
-            assert_eq!(expected, found);
+        for (expected_val, found_val) in expected.iter().zip(found.iter()) {
+            assert_eq!(expected_val, found_val);
         }
     }
 }
